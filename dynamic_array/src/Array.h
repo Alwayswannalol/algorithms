@@ -412,4 +412,7 @@ public:
 
     ConstIterator cbegin() const { return begin(); }
     ConstIterator cend() const { return end(); }
+
+    T* begin_ptr() { return data_; }
+    T* end_ptr() { return data_ + size_; }
 };
