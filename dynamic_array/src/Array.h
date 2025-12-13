@@ -178,14 +178,16 @@ public:
         assert(index >= 0 && index <= size_);
 
         ensure_capacity(size_ + 1);
+
         if (size_ > 0)
         {
-            new (data_ + size_) T(std::move_if_noexcept(data_[size_ - 1]));
-            for (int i = size_ - 1; i > index; --i)
+            for (int i = size_; i > index; --i)
             {
-                data_[i] = std::move_if_noexcept(data_[i - 1]);
+                new (data_ + i) T(std::move_if_noexcept(data_[i - 1]));
+                data_[i - 1].~T();
             }
         }
+
         new (data_ + index) T(value);
         ++size_;
         return index;
@@ -195,9 +197,9 @@ public:
     {
         assert(index >= 0 && index < size_);
 
-        data_[index].~T();
         for (int i = index; i < size_ - 1; ++i)
         {
+            data_[i].~T();
             new (data_ + i) T(std::move_if_noexcept(data_[i + 1]));
             data_[i + 1].~T();
         }
