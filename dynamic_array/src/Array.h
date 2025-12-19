@@ -197,9 +197,9 @@ public:
     {
         assert(index >= 0 && index < size_);
 
+        data_[index].~T();
         for (int i = index; i < size_ - 1; ++i)
         {
-            data_[i].~T();
             new (data_ + i) T(std::move_if_noexcept(data_[i + 1]));
             data_[i + 1].~T();
         }
