@@ -200,6 +200,7 @@ public:
         data_[index].~T();
         for (int i = index; i < size_ - 1; ++i)
         {
+            // data_[i].~T(); было
             new (data_ + i) T(std::move_if_noexcept(data_[i + 1]));
             data_[i + 1].~T();
         }
