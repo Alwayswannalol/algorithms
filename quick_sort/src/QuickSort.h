@@ -107,3 +107,26 @@ void sort(T *first, T *last, Compare comp)
     }
     quicksort(first, last, comp);
 }
+
+template <typename T, typename Compare>
+void quicksort_no_insertion(T *first, T *last, Compare comp)
+{
+    while (last - first > 1)
+    {
+        // Убрана проверка на INSERTION_SORT_QUANT
+        T *middle = first + (last - first) / 2;
+        T *pivot = median_of_three(first, middle, last - 1, comp);
+        T *p = partition(first, last, pivot, comp);
+
+        if (p - first < last - p - 1)
+        {
+            quicksort_no_insertion(first, p, comp);
+            first = p + 1;
+        }
+        else
+        {
+            quicksort_no_insertion(p + 1, last, comp);
+            last = p;
+        }
+    }
+}

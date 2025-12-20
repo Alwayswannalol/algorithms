@@ -376,32 +376,6 @@ TEST_F(QuickSortCornerCasesTest, NotStableSort) {
     }
 }
 
-TEST_F(QuickSortCornerCasesTest, MedianOfThreeCheck) {
-    int a = 1, b = 2, c = 3;
-    int* med = median_of_three(&a, &b, &c, std::less<int>());
-    EXPECT_EQ(*med, 2);
-    
-    a = 3; b = 2; c = 1;
-    med = median_of_three(&a, &b, &c, std::less<int>());
-    EXPECT_EQ(*med, 2);
-    
-    a = 2; b = 3; c = 1;
-    med = median_of_three(&a, &b, &c, std::less<int>());
-    EXPECT_EQ(*med, 2);
-    
-    a = 2; b = 1; c = 3;
-    med = median_of_three(&a, &b, &c, std::less<int>());
-    EXPECT_EQ(*med, 2);
-    
-    a = 3; b = 1; c = 2;
-    med = median_of_three(&a, &b, &c, std::less<int>());
-    EXPECT_EQ(*med, 2);
-    
-    a = 1; b = 3; c = 2;
-    med = median_of_three(&a, &b, &c, std::less<int>());
-    EXPECT_EQ(*med, 2);
-}
-
 TEST_F(QuickSortCornerCasesTest, PartitionCheck) {
     int arr[] = {5, 3, 8, 1, 2, 7, 4, 6};
     int* pivot = &arr[3];

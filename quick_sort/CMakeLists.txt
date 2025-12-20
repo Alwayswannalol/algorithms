@@ -18,6 +18,7 @@ FetchContent_MakeAvailable(googletest)
 add_executable(quick_sort src/main.cpp)
 
 # Тесты
+add_executable(comparison_sorts src/comparison_test.cpp)
 add_executable(quick_sort_tests src/test_quicksort.cpp)
 target_link_libraries(quick_sort_tests PRIVATE gtest_main gmock)
 
